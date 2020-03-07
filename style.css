@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   text-align: center;
+  padding: .5rem;
 }
 
 html, body {
@@ -12,6 +13,7 @@ html, body {
 
 .container {
   width: 100%;
+  min-height: 100%;
   padding: 1rem;
 }
 
@@ -20,8 +22,8 @@ table {
   border: thin solid black;
   border-radius: 10px;
   margin: 0 auto;
-  width: 200px;
-  height: 300px;
+  width: 250px;
+  height: 460px;
 }
 
 thead, .screen, .screen td {
@@ -56,6 +58,14 @@ tbody td:hover {
   background-color: darkgrey;
 }
 
+tbody td:active {
+  background-color: darkslategrey;
+}
+
 tbody .operators:hover {
   background-color: darkorange;
+}
+
+tbody .operators:active {
+  background-color: orangered;
 }
