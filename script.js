@@ -15,13 +15,16 @@ var backspace = document.querySelector("[data-backspace]");
 
 var screen = document.querySelector(".display");
 
+// store all numbered buttons here
 var buttonsArr = [
   one, two, three, four, five, six, seven, eight,
   nine, zero
 ];
 
+// event listeners
 backspace.addEventListener("click", () => {
   if (screen.textContent !== "0") {
+    // remove last character from screen
     var data = screen.textContent.split('');
     data.pop();
     data = data.join('');
@@ -29,6 +32,7 @@ backspace.addEventListener("click", () => {
   }
 
   if (screen.textContent.length === 1) {
+    // reset to 0 if thats the last character
     screen.textContent = "0";
   }
 });
@@ -38,12 +42,14 @@ clear.addEventListener("click", () => {
 });
 
 decimal.addEventListener("click", () => {
+  // add decimal point if its not been added already to screen
   if (!screen.textContent.includes(".")) screen.textContent += decimal.textContent;
 });
 
 buttonsArr.forEach(btn => {
   btn.addEventListener("click", () => {
-    if (screen.textContent[0] === "0") screen.textContent = " ";
+    // if screen value is 0, reset to empty and add values
+    if (screen.textContent === "0") screen.textContent = " ";
     screen.textContent += btn.textContent;
   });
 });
