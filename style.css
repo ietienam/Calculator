@@ -9,6 +9,7 @@ html, body {
   height: 100%;
   margin: 0 auto;
   padding: 1rem;
+  background-color: peachpuff;
 }
 
 .container {
@@ -23,7 +24,7 @@ table {
   border-radius: 10px;
   margin: 0 auto;
   width: 250px;
-  height: 460px;
+  height: 450px;
 }
 
 thead, .screen, .screen td {
