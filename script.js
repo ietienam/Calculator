@@ -17,7 +17,7 @@ var screen = document.querySelector(".display");
 
 var buttonsArr = [
   one, two, three, four, five, six, seven, eight,
-  nine, zero, decimal
+  nine, zero
 ];
 
 backspace.addEventListener("click", () => {
@@ -35,6 +35,10 @@ backspace.addEventListener("click", () => {
 
 clear.addEventListener("click", () => {
   screen.textContent = "0";
+});
+
+decimal.addEventListener("click", () => {
+  if (!screen.textContent.includes(".")) screen.textContent += decimal.textContent;
 });
 
 buttonsArr.forEach(btn => {
