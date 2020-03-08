@@ -52,6 +52,8 @@ function multiply(str) {
   return data.reduce((a, b) => a * b);
 }
 
+//function calculate()
+
 // event listeners
 backspace.addEventListener("click", () => {
   if (screen.textContent !== "0") {
@@ -87,11 +89,14 @@ buttonsArr.forEach(btn => {
 
 operators.forEach(btn => {
   btn.addEventListener("click", () => {
+    // if operator button if pushed after a decimal, add 0 after the decimal before the operator appears
     if (screen.textContent[screen.textContent.length - 1] === '.') {
       var data = screen.textContent.split('');
       data.push('0');
-      screen.textContent = data.join('');
+      data = data.join('');
+      screen.textContent = `${data}`;
     }
+    // add operator only when the text content isnt 0 and an operator doesnt already exist
     if (screen.textContent !== '0' && screen.textContent.lastIndexOf('+') === -1 && screen.textContent.lastIndexOf('-') === -1 && screen.textContent.lastIndexOf('/') === -1 && screen.textContent.lastIndexOf('*') === -1) {
       screen.textContent += btn.textContent;
     }
