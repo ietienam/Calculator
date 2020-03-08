@@ -13,6 +13,12 @@ var clear = document.querySelector("[data-clear]");
 var decimal = document.querySelector("[data-decimal]");
 var backspace = document.querySelector("[data-backspace]");
 
+var addBtn = document.querySelector("[data-add]");
+var subtractBtn = document.querySelector("[data-subtract]");
+var divideBtn = document.querySelector("[data-divide]");
+var multiplyBtn = document.querySelector("[data-multiply]");
+var equalsBtn = document.querySelector("[data-equals]");
+
 var screen = document.querySelector(".display");
 
 // store all numbered buttons here
@@ -21,8 +27,29 @@ var buttonsArr = [
   nine, zero
 ];
 
-function add(arr) {
-  
+var operators = [
+  addBtn, divideBtn, subtractBtn,
+  multiplyBtn
+];
+
+function add(str) {
+  var data = str.split('+');
+  return data.reduce((a, b) => a + b);
+}
+
+function subtract(str) {
+  var data = str.split('-');
+  return data.reduce((a, b) => a - b);
+}
+
+function divide(str) {
+  var data = str.split('/');
+  return data.reduce((a, b) => a / b);
+}
+
+function multiply(str) {
+  var data = str.split('*');
+  return data.reduce((a, b) => a * b);
 }
 
 // event listeners
@@ -54,6 +81,19 @@ buttonsArr.forEach(btn => {
   btn.addEventListener("click", () => {
     // if screen value is 0, reset to empty and add values
     if (screen.textContent === "0") screen.textContent = " ";
-    screen.textContent += btn.textContent;
+    if (screen.textContent.length < 25) screen.textContent += btn.textContent;
+  });
+});
+
+operators.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (screen.textContent[screen.textContent.length - 1] === '.') {
+      var data = screen.textContent.split('');
+      data.push('0');
+      screen.textContent = data.join('');
+    }
+    if (screen.textContent !== '0' && screen.textContent.lastIndexOf('+') === -1 && screen.textContent.lastIndexOf('-') === -1 && screen.textContent.lastIndexOf('/') === -1 && screen.textContent.lastIndexOf('*') === -1) {
+      screen.textContent += btn.textContent;
+    }
   });
 });
