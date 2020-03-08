@@ -52,7 +52,9 @@ function multiply(str) {
   return data.reduce((a, b) => a * b);
 }
 
-//function calculate()
+/**FUNCTION SHOULD CHECK WHICH BUTTON WAS CLICKED AND EXECUTE THE APPROPRIATE FUNCTION AND A SCREEN PARAM VALUE IN THE EVENT LISTENER */
+//Seperate string into array for values before and after operator
+//function calculate(operator, str)
 
 // event listeners
 backspace.addEventListener("click", () => {
@@ -74,16 +76,11 @@ clear.addEventListener("click", () => {
   screen.textContent = "0";
 });
 
-decimal.addEventListener("click", () => {
-  // add decimal point if its not been added already to screen
-  if (!screen.textContent.includes(".")) screen.textContent += decimal.textContent;
-});
-
 buttonsArr.forEach(btn => {
   btn.addEventListener("click", () => {
     // if screen value is 0, reset to empty and add values
     if (screen.textContent === "0") screen.textContent = " ";
-    if (screen.textContent.length < 25) screen.textContent += btn.textContent;
+    if (screen.textContent.length < 15) screen.textContent += btn.textContent;
   });
 });
 
@@ -97,8 +94,15 @@ operators.forEach(btn => {
       screen.textContent = `${data}`;
     }
     // add operator only when the text content isnt 0 and an operator doesnt already exist
-    if (screen.textContent !== '0' && screen.textContent.lastIndexOf('+') === -1 && screen.textContent.lastIndexOf('-') === -1 && screen.textContent.lastIndexOf('/') === -1 && screen.textContent.lastIndexOf('*') === -1) {
+    if (screen.textContent !== '0' && screen.textContent.lastIndexOf('+') === -1 && screen.textContent.lastIndexOf('-') === -1 && screen.textContent.lastIndexOf('/') === -1 && screen.textContent.lastIndexOf('x') === -1) {
       screen.textContent += btn.textContent;
     }
   });
+});
+
+
+/**CHECK HOW TO ADD DECIMAL. E.G 2.0 + 2.0 CANT WORK BECAUSE CURRENT RULE ONLY ALLOWS ONE DECIMAL */
+decimal.addEventListener("click", () => {
+  // add decimal point if its not been added already to screen
+  if (!screen.textContent.includes(".")) screen.textContent += decimal.textContent;
 });
