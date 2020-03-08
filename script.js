@@ -54,7 +54,25 @@ function multiply(str) {
 
 /**FUNCTION SHOULD CHECK WHICH BUTTON WAS CLICKED AND EXECUTE THE APPROPRIATE FUNCTION AND A SCREEN PARAM VALUE IN THE EVENT LISTENER */
 //Seperate string into array for values before and after operator
-//function calculate(operator, str)
+function calculate(operator, str) {
+  switch (operator) {
+    case '+':
+      add(str)
+      break;
+    case '-':
+      subtract(str)
+      break;
+    case '/':
+      divide(str)
+      break;
+    case 'x':
+      multiply(str)
+      break;
+
+    default:
+      break;
+  }
+}
 
 // event listeners
 backspace.addEventListener("click", () => {
