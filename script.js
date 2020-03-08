@@ -21,6 +21,10 @@ var buttonsArr = [
   nine, zero
 ];
 
+function add(arr) {
+  
+}
+
 // event listeners
 backspace.addEventListener("click", () => {
   if (screen.textContent !== "0") {
