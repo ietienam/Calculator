@@ -70,25 +70,6 @@ function calculate(operator, str) {
 }
 
 // event listeners
-backspace.addEventListener("click", () => {
-  if (screen.textContent !== "0") {
-    // remove last character from screen
-    var data = screen.textContent.split('');
-    data.pop();
-    data = data.join('');
-    screen.textContent = data;
-  }
-
-  if (screen.textContent.length === 1) {
-    // reset to 0 if thats the last character
-    screen.textContent = "0";
-  }
-});
-
-clear.addEventListener("click", () => {
-  screen.textContent = "0";
-});
-
 buttonsArr.forEach(btn => {
   btn.addEventListener("click", () => {
     // if screen value is 0, reset to empty and add values
@@ -109,7 +90,13 @@ operators.forEach(btn => {
       screen.textContent = `${data}`;
     }
     // add operator only when the text content isnt 0 and an operator doesnt already exist
-    if (screen.textContent !== '0' && screen.textContent.lastIndexOf('+') === -1 && screen.textContent.lastIndexOf('-') === -1 && screen.textContent.lastIndexOf('/') === -1 && screen.textContent.lastIndexOf('x') === -1) {
+    if (
+      screen.textContent !== '0' &&
+      screen.textContent.lastIndexOf('+') === -1 &&
+      screen.textContent.lastIndexOf('-') === -1 &&
+      screen.textContent.lastIndexOf('/') === -1 &&
+      screen.textContent.lastIndexOf('x') === -1
+    ) {
       screen.textContent += btn.textContent;
     }
   });
@@ -119,12 +106,46 @@ operators.forEach(btn => {
 decimal.addEventListener("click", () => {
   // add decimal point if its not been added already to screen
   if (!screen.textContent.includes(".")) screen.textContent += decimal.textContent;
+  if (
+    screen.textContent.includes('+') ||
+    screen.textContent.includes('-') ||
+    screen.textContent.includes('/') ||
+    screen.textContent.includes('x')
+    ) {
+      if (
+        !screen.textContent.split('+')[1].includes('.') ||
+        !screen.textContent.split('-')[1].includes('.') ||
+        !screen.textContent.split('/')[1].includes('.') ||
+        !screen.textContent.split('x')[1].includes('.')
+      ) {
+        screen.textContent += decimal.textContent;
+      }
+    }
 });
 
 equalsBtn.addEventListener("click", () => {
   var operator = '';
   operators.forEach(op => {
     if (screen.textContent.includes(op.textContent)) operator = op.textContent;
-  })
+  });
   screen.textContent = calculate(operator, screen.textContent);
+});
+
+backspace.addEventListener("click", () => {
+  if (screen.textContent !== "0") {
+    // remove last character from screen
+    var data = screen.textContent.split('');
+    data.pop();
+    data = data.join('');
+    screen.textContent = data;
+  }
+
+  if (screen.textContent.length === 1) {
+    // reset to 0 if thats the last character
+    screen.textContent = "0";
+  }
+});
+
+clear.addEventListener("click", () => {
+  screen.textContent = "0";
 });
