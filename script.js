@@ -34,40 +34,35 @@ var operators = [
 
 function add(str) {
   var data = str.split('+');
-  return data.reduce((a, b) => a + b);
+  return data.reduce((a, b) => Number(a) + Number(b));
 }
 
 function subtract(str) {
   var data = str.split('-');
-  return data.reduce((a, b) => a - b);
+  return data.reduce((a, b) => Number(a) - Number(b));
 }
 
 function divide(str) {
   var data = str.split('/');
-  return data.reduce((a, b) => a / b);
+  return data.reduce((a, b) => Number(a) / Number(b));
 }
 
 function multiply(str) {
-  var data = str.split('*');
-  return data.reduce((a, b) => a * b);
+  var data = str.split('x');
+  return data.reduce((a, b) => Number(a) * Number(b));
 }
 
 /**FUNCTION SHOULD CHECK WHICH BUTTON WAS CLICKED AND EXECUTE THE APPROPRIATE FUNCTION AND A SCREEN PARAM VALUE IN THE EVENT LISTENER */
-//Seperate string into array for values before and after operator
 function calculate(operator, str) {
   switch (operator) {
     case '+':
-      add(str)
-      break;
+      return add(str)
     case '-':
-      subtract(str)
-      break;
+      return subtract(str)
     case '/':
-      divide(str)
-      break;
+      return divide(str)
     case 'x':
-      multiply(str)
-      break;
+      return multiply(str)
 
     default:
       break;
@@ -102,6 +97,8 @@ buttonsArr.forEach(btn => {
   });
 });
 
+// CHECK HOW TO ADD A MAXIMUM OF 2 OPERATORS BECAUSE -1 + 2 DOESNT WORK
+//CHECK HOW TO INVOKE CALCULATE FUNCTION IF YOU PRESS AN OPERATOR AND AN OPPERATOR ALREADY EXISTS THAT IS NOT THE FIRST INDEX
 operators.forEach(btn => {
   btn.addEventListener("click", () => {
     // if operator button if pushed after a decimal, add 0 after the decimal before the operator appears
@@ -118,9 +115,16 @@ operators.forEach(btn => {
   });
 });
 
-
 /**CHECK HOW TO ADD DECIMAL. E.G 2.0 + 2.0 CANT WORK BECAUSE CURRENT RULE ONLY ALLOWS ONE DECIMAL */
 decimal.addEventListener("click", () => {
   // add decimal point if its not been added already to screen
   if (!screen.textContent.includes(".")) screen.textContent += decimal.textContent;
+});
+
+equalsBtn.addEventListener("click", () => {
+  var operator = '';
+  operators.forEach(op => {
+    if (screen.textContent.includes(op.textContent)) operator = op.textContent;
+  })
+  screen.textContent = calculate(operator, screen.textContent);
 });
