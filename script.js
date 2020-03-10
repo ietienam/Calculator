@@ -52,7 +52,8 @@ function multiply(str) {
   return data.reduce((a, b) => Number(a) * Number(b));
 }
 
-/**FUNCTION SHOULD CHECK WHICH BUTTON WAS CLICKED AND EXECUTE THE APPROPRIATE FUNCTION AND A SCREEN PARAM VALUE IN THE EVENT LISTENER */
+/**FUNCTION SHOULD CHECK WHICH BUTTON WAS CLICKED AND EXECUTE THE APPROPRIATE
+ * FUNCTION AND A SCREEN PARAM VALUE IN THE EVENT LISTENER */
 function calculate(operator, str) {
   switch (operator) {
     case '+':
@@ -79,7 +80,8 @@ buttonsArr.forEach(btn => {
 });
 
 // CHECK HOW TO ADD A MAXIMUM OF 2 OPERATORS BECAUSE -1 + 2 DOESNT WORK
-//CHECK HOW TO INVOKE CALCULATE FUNCTION IF YOU PRESS AN OPERATOR AND AN OPPERATOR ALREADY EXISTS THAT IS NOT THE FIRST INDEX
+// CHECK HOW TO INVOKE CALCULATE FUNCTION IF YOU PRESS AN OPERATOR AND AN OPPERATOR ALREADY
+// EXISTS THAT IS NOT THE FIRST INDEX
 operators.forEach(btn => {
   btn.addEventListener("click", () => {
     // if operator button if pushed after a decimal, add 0 after the decimal before the operator appears
@@ -126,7 +128,10 @@ decimal.addEventListener("click", () => {
 equalsBtn.addEventListener("click", () => {
   var operator = '';
   operators.forEach(op => {
-    if (screen.textContent.includes(op.textContent)) operator = op.textContent;
+    if (
+      screen.textContent.includes(op.textContent) &&
+      screen.textContent.lastIndexOf(op.textContent) !== 0
+      ) operator = op.textContent;
   });
   var result = calculate(operator, screen.textContent);
   screen.textContent = `${result}`;
