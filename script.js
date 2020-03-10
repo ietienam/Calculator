@@ -93,9 +93,9 @@ operators.forEach(btn => {
     if (
       screen.textContent !== '0' &&
       screen.textContent.lastIndexOf('+') === -1 &&
-      screen.textContent.lastIndexOf('-') === -1 &&
       screen.textContent.lastIndexOf('/') === -1 &&
-      screen.textContent.lastIndexOf('x') === -1
+      screen.textContent.lastIndexOf('x') === -1 &&
+      (screen.textContent.lastIndexOf('-') === -1 || screen.textContent.indexOf('-') === 0)
     ) {
       screen.textContent += btn.textContent;
     }
@@ -128,7 +128,8 @@ equalsBtn.addEventListener("click", () => {
   operators.forEach(op => {
     if (screen.textContent.includes(op.textContent)) operator = op.textContent;
   });
-  screen.textContent = calculate(operator, screen.textContent);
+  var result = calculate(operator, screen.textContent);
+  screen.textContent = `${result}`;
 });
 
 backspace.addEventListener("click", () => {
